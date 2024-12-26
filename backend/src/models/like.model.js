@@ -4,11 +4,13 @@ const likeSchema = new Schema(
     {
         design:{                    
             type:Schema.Types.ObjectId,
-            ref:"Design"
+            ref:"Design",
+            required:true
         },
         likedBy:{
             type:Schema.Types.ObjectId,
-            ref:"User"
+            ref:"User",
+            required:true
         }
     },
     {

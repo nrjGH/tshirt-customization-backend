@@ -1,19 +1,27 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const cartSchema = new Schema(
     {
-        owner:{
-            type:Schema.Types.ObjectId,
-            ref:"User",
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
         },
-        designs:[{
-            type:Schema.Types.ObjectId,
-            ref:"Design",
-        }],
+        designs: [
+            {
+                design_id: {
+                    type: Schema.Types.ObjectId,
+                    ref: "Design",
+                },
+                quantity: {
+                    type: Number,
+                },
+            },
+        ],
     },
     {
-        timestamps:true
+        timestamps: true,  // Automatically handles created_at and updated_at
     }
-)
+);
 
-export const Cart = mongoose.model("Cart",cartSchema);
+export const Cart = mongoose.model("Cart", cartSchema);
