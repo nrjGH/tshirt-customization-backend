@@ -74,10 +74,10 @@ const deleteDesign = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, {}, "Design deleted successfully"));
 });
 
-// List all public designs
+// List all public designs (does not work as of 2025-01-03)
 const listPublicDesigns = asyncHandler(async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
-    const designs = await Design.paginate(
+    const designs = await Design.aggregatePaginate(
         { isPublic: true },
         { page, limit, populate: "createdBy", select: "username fullname" }
     );
@@ -87,10 +87,56 @@ const listPublicDesigns = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, designs, "Public designs fetched successfully"));
 });
 
+// Toggle the design to be public/private
+const toggleDesignVisibility = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    const design = await Design.findOne({ _id: id, createdBy: req.user._id });
+    if (!design) {
+        throw new ApiError(404, "Design not found or not authorized");
+    }
+
+    design.isPublic = !design.isPublic;
+    await design.save();
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, design, "Design visibility toggled successfully"));
+});
+
+// Search design using its name (does not work as of 2025-01-03)
+const searchDesignsByName = asyncHandler(async (req, res) => {
+    const { query, page = 1, limit = 10 } = req.query;
+
+    console.log(query);
+
+    if (!query) {
+        throw new ApiError(400, "Search query is required");
+    }
+
+    const designs = await Design.aggregatepaginate(
+        { name: { $regex: query, $options: "i" } },
+        { page, limit, populate: "createdBy", select: "username fullname" }
+    );
+
+    if (designs.docs.length === 0) {
+        return res
+            .status(404)
+            .json(new ApiResponse(404, {}, "No designs matched your search"));
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, designs, "Search results fetched successfully"));
+});
+
+
 export {
     createDesign,
     getDesignById,
     updateDesign,
     deleteDesign,
-    listPublicDesigns
+    listPublicDesigns,
+    toggleDesignVisibility,
+    searchDesignsByName
 };
