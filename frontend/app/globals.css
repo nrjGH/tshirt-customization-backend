@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 10% 10%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --radius: 0.5rem;
+
+    --color-pastel-pink: #FFD1DC;
+    --color-pastel-blue: #AEC6CF;
+    --color-pastel-green: #B0E57C;
+    --color-pastel-yellow: #FDFD96;
+    --color-pastel-purple: #C3B1E1;
+  }
+ 
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+    --ring: 216 34% 17%;
+
+    --color-pastel-pink: #FFD1DC;
+    --color-pastel-blue: #AEC6CF;
+    --color-pastel-green: #B0E57C;
+    --color-pastel-yellow: #FDFD96;
+    --color-pastel-purple: #C3B1E1;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.btn-hover {
+  @apply transition-all duration-200 ease-in-out hover:scale-105 hover:shadow-md;
+}
+
+.link-hover {
+  @apply transition-colors duration-200 ease-in-out hover:text-primary;
+}
+
+.logo {
+  @apply font-bold text-2xl text-primary;
+}
+
+.animate-fade-in {
+  @apply transition-opacity duration-300 ease-in-out;
+}
+
+.animate-fade-in:hover {
+  @apply opacity-80;
+}
+
+.animate-scale {
+  @apply transition-transform duration-300 ease-in-out;
+}
+
+.animate-scale:hover {
+  @apply scale-105;
+}
+
+.bg-gradient {
+  background: linear-gradient(to bottom right, hsl(222, 47%, 11%), hsl(224, 71%, 4%));
+}
+
+.text-gradient {
+  background: linear-gradient(to right, hsl(210, 40%, 98%), hsl(217.2, 91.2%, 59.8%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
