@@ -1,4 +1,7 @@
 /* This is a sample CSS file.  The .text-gradient class has been removed as requested. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   font-family: sans-serif;

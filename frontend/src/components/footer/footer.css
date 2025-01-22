@@ -1,0 +1,130 @@
+/* Base Footer Styles */
+.footer {
+    background-color: #374151;
+    color: #ffffff;
+    padding: 1.5rem 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+ }
+ 
+ .footer-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+ }
+ 
+ .footer-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1.5rem;
+ }
+ 
+ .footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+ }
+ 
+ .footer-logo-image {
+    width: 32px;
+    height: 32px;
+    margin-right: 0.5rem;
+ }
+ 
+ .footer-logo-text {
+    font-size: 1.25rem;
+    font-weight: bold;
+ }
+ 
+ .footer-description {
+    font-size: 0.875rem;
+    color: #d1d5db;
+    margin-bottom: 1.5rem;
+ }
+ 
+ .footer-links {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+ }
+ 
+ .footer-section {
+    margin-bottom: 1.5rem;
+ }
+ 
+ .footer-heading {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: #3b82f6;
+ }
+ 
+ .footer-list {
+    padding: 0;
+    margin: 0;
+ }
+ 
+ .footer-link {
+    display: block;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+ }
+ 
+ .footer-bottom {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 0.75rem;
+ }
+ 
+ /* Tablet (768px) */
+ @media (min-width: 768px) {
+    .footer-header {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+    
+    .footer-logo {
+        margin-bottom: 0;
+    }
+ 
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+ }
+ 
+ /* Desktop (1024px) */
+ @media (min-width: 1024px) {
+    .footer {
+        padding: 2rem 1rem;
+    }
+ 
+    .footer-links {
+        grid-template-columns: repeat(4, 1fr);
+    }
+ 
+    .footer-logo-image {
+        width: 40px;
+        height: 40px;
+    }
+ 
+    .footer-logo-text {
+        font-size: 1.5rem;
+    }
+ }
+ 
+ /* Sticky Footer */
+ body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+ }
+ 
+ main {
+    flex: 1;
+ }
