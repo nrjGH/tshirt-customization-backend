@@ -1,10 +1,7 @@
 import './cart.css';
 
 const CartPage = () => {
-  const cart = [
-    { id: 1, name: 'Design 1', quantity: 1, color: 'Black' },
-    { id: 2, name: 'Design 2', quantity: 2, color: 'White' },
-  ];
+  const cart = [];
 
   const handleRemove = (id) => {
     console.log(`Removing item with ID: ${id}`);

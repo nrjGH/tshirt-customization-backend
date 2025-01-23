@@ -10,15 +10,15 @@ const HomePage = () => {
         <div className="designs-container">
           {/* Placeholder for top 3 trending designs */}
           <div className="design-card">
-            <img src="/placeholder1.svg" alt="Design 1" className="design-image" />
+            <img src="https://mockey.ai/wp-content/uploads/sites/15/2024/02/create-a-celestial-bard-avatar-clad-in-gold-stardust-robes-and-strumming-a-lute-beneath-a-sky-filled-with-cosmic-music-prompt-for-dall-e.webp" alt="Design 1" className="design-image" />
             <h3 className="design-title"></h3>
           </div>
           <div className="design-card">
-            <img src="/placeholder2.svg" alt="Design 2" className="design-image" />
+            <img src="https://mockey.ai/wp-content/uploads/sites/15/2024/02/design-an-avatar-of-a-cybernetic-samurai-set-against-a-futuristic-city-skyline-with-glowing-neon-katanas-and-circuitry-armor-dall-e-prompts.webp" alt="Design 2" className="design-image" />
             <h3 className="design-title"></h3>
           </div>
           <div className="design-card">
-            <img src="/placeholder3.svg" alt="Design 3" className="design-image" />
+            <img src="https://mockey.ai/wp-content/uploads/sites/15/2024/02/under-a-sky-illuminated-by-earths-light-aliens-play-soccer-with-moon-rocks-on-a-lunar-colony-dall-e-prompts.webp" alt="Design 3" className="design-image" />
             <h3 className="design-title"></h3>
           </div>
         </div>
