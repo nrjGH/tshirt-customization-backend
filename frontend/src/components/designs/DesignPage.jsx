@@ -13,7 +13,7 @@ const DesignsPage = () => {
   // Fetch public designs
   const fetchDesigns = async () => {
     try {
-      const response = await axios.get(`/api/designs/public`, {
+      const response = await axios.get(`https://tshirt-customization-backend.onrender.com/api/v1/designs/public`, {
         params: { page, limit: 10 },
       });
 

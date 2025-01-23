@@ -105,3 +105,7 @@
 .design-select > option {
   background-color: rgb(24, 2, 2) !important;
 }
+
+.design-select-text{
+  color:#3c58e0
+}

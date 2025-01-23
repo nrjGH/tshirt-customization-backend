@@ -32,14 +32,14 @@ const DesignToolPage = () => {
                 placeholder="Select color of your shirt"
                 className="design-select"
               >
-                <option value="white">White</option>
-                <option value="black">Black</option>
-                <option value="red">Red</option>
-                <option value="#FFD1DC">Pastel Pink</option>
-                <option value="#AEC6CF">Pastel Blue</option>
-                <option value="#77DD77">Pastel Green</option>
-                <option value="#FDFD96">Pastel Yellow</option>
-                <option value="#C3B1E1">Pastel Purple</option>
+                <option value="white" className="design-select-text">White</option>
+                <option value="black" className="design-select-text">Black</option>
+                <option value="red" className="design-select-text">Red</option>
+                <option value="#FFD1DC" className="design-select-text">Pastel Pink</option>
+                <option value="#AEC6CF" className="design-select-text">Pastel Blue</option>
+                <option value="#77DD77" className="design-select-text">Pastel Green</option>
+                <option value="#FDFD96" className="design-select-text">Pastel Yellow</option>
+                <option value="#C3B1E1" className="design-select-text">Pastel Purple</option>
               </select>
             </div>
             <div className="form-group">
@@ -90,8 +90,8 @@ const DesignToolPage = () => {
           <div
             className="preview-box"
             style={{
-              // backgroundColor:
-              //   color === 'white' ? '#ffffff' : color.startsWith('pastel') ? var(--color-${color}) : color,
+              backgroundColor:
+              color === 'white' ? '#ffffff' : color.startsWith('pastel') ? `var(--color-${color})` : color, 
             }}
           >
             {previewImage ? (
