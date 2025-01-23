@@ -6,6 +6,11 @@ const DesignToolPage = () => {
   const [design, setDesign] = useState('');
   const [name, setName] = useState('');
   const [isPublic, setIsPublic] = useState(false);
+  const [previewImage, setPreviewImage] = useState(''); // State for fetched image
+
+  const handleFetchImage = () => {
+    setPreviewImage(design); // Set the fetched image as the preview
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +52,13 @@ const DesignToolPage = () => {
                 placeholder="Public URL of image"
                 className="design-input"
               />
+              <button
+                type="button"
+                className="fetch-button"
+                onClick={handleFetchImage}
+              >
+                Fetch
+              </button>
             </div>
             <div className="form-group">
               <label htmlFor="name">Design Name</label>
@@ -78,13 +90,13 @@ const DesignToolPage = () => {
           <div
             className="preview-box"
             style={{
-              backgroundColor:
-                color === 'white' ? '#ffffff' : color.startsWith('pastel') ? `var(--color-${color})` : color,
+              // backgroundColor:
+              //   color === 'white' ? '#ffffff' : color.startsWith('pastel') ? var(--color-${color}) : color,
             }}
           >
-            {design ? (
+            {previewImage ? (
               <img
-                src={design}
+                src={previewImage}
                 alt="Design Preview"
                 className="preview-image"
               />

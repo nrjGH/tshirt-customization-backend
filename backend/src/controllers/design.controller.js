@@ -75,12 +75,32 @@ const deleteDesign = asyncHandler(async (req, res) => {
 });
 
 // List all public designs (does not work as of 2025-01-03)
+// const listPublicDesigns = asyncHandler(async (req, res) => {
+//     const { page = 1, limit = 10 } = req.query;
+//     const designs = await Design.aggregatePaginate(
+//         { isPublic: true },
+//         { page, limit, populate: "createdBy", select: "username fullname" }
+//     );
+
+//     return res
+//         .status(200)
+//         .json(new ApiResponse(200, designs, "Public designs fetched successfully"));
+// });
+
 const listPublicDesigns = asyncHandler(async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
-    const designs = await Design.aggregatePaginate(
-        { isPublic: true },
-        { page, limit, populate: "createdBy", select: "username fullname" }
-    );
+    
+    const options = {
+        page: parseInt(page),
+        limit: parseInt(limit),
+        populate: { path: 'createdBy', select: 'username fullname' }
+    };
+
+    const aggregate = Design.aggregate([
+        { $match: { isPublic: true } }
+    ]);
+
+    const designs = await Design.aggregatePaginate(aggregate, options);
 
     return res
         .status(200)
@@ -105,30 +125,59 @@ const toggleDesignVisibility = asyncHandler(async (req, res) => {
 });
 
 // Search design using its name (does not work as of 2025-01-03)
+// const searchDesignsByName = asyncHandler(async (req, res) => {
+//     const { query, page = 1, limit = 10 } = req.query;
+
+//     console.log(query);
+
+//     if (!query) {
+//         throw new ApiError(400, "Search query is required");
+//     }
+
+//     const designs = await Design.aggregatepaginate(
+//         { name: { $regex: query, $options: "i" } },
+//         { page, limit, populate: "createdBy", select: "username fullname" }
+//     );
+
+//     if (designs.docs.length === 0) {
+//         return res
+//             .status(404)
+//             .json(new ApiResponse(404, {}, "No designs matched your search"));
+//     }
+
+//     return res
+//         .status(200)
+//         .json(new ApiResponse(200, designs, "Search results fetched successfully"));
+// });
 const searchDesignsByName = asyncHandler(async (req, res) => {
     const { query, page = 1, limit = 10 } = req.query;
-
-    console.log(query);
-
+ 
     if (!query) {
         throw new ApiError(400, "Search query is required");
     }
-
-    const designs = await Design.aggregatepaginate(
-        { name: { $regex: query, $options: "i" } },
-        { page, limit, populate: "createdBy", select: "username fullname" }
-    );
-
+ 
+    const options = {
+        page: parseInt(page),
+        limit: parseInt(limit),
+        populate: { path: 'createdBy', select: 'username fullname' }
+    };
+ 
+    const aggregate = Design.aggregate([
+        { $match: { name: { $regex: query, $options: "i" } } }
+    ]);
+ 
+    const designs = await Design.aggregatePaginate(aggregate, options);
+ 
     if (designs.docs.length === 0) {
         return res
             .status(404)
             .json(new ApiResponse(404, {}, "No designs matched your search"));
     }
-
+ 
     return res
         .status(200)
         .json(new ApiResponse(200, designs, "Search results fetched successfully"));
-});
+ });
 
 
 export {
