@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
 import './profile.css';
 
@@ -6,23 +7,39 @@ const ProfilePage = () => {
   const [profile, setProfile] = useState({
     username: '',
     fullname: '',
-    email: '',
-    totalDesigns: 0,
+    email: ''
   });
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('refreshToken');
+    
+    navigate('/login');
+  };
 
   useEffect(() => {
-    // Fetch user profile data
-    const fetchProfile = async () => {
+    const fetchUserData = async () => {
       try {
-        const response = await axios.get('/api/user/profile'); // Adjust the endpoint based on your backend
-        setProfile(response.data);
+        const token = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
+        
+        if (!token || !storedUser) {
+          navigate('/login');
+          return;
+        }
+  
+        const parsedUser = JSON.parse(storedUser);
+        setProfile(parsedUser);
       } catch (error) {
-        console.error('Failed to fetch profile:', error);
+        console.error('Profile fetch failed:', error);
+        navigate('/login');
       }
     };
-
-    fetchProfile();
-  }, []);
+  
+    fetchUserData();
+  }, [navigate]);
 
   return (
     <div className="profile-page">
@@ -41,11 +58,21 @@ const ProfilePage = () => {
             <span className="profile-label">Email:</span>
             <span className="profile-value">{profile.email}</span>
           </div>
-          <div className="profile-item">
-            <span className="profile-label">Total Designs Created:</span>
-            <span className="profile-value">{profile.totalDesigns}</span>
-          </div>
         </div>
+        <button 
+          onClick={handleLogout}
+          style={{
+            marginTop: '20px',
+            padding: '10px 20px',
+            backgroundColor: '#f44336',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Logout
+        </button>
       </div>
     </div>
   );

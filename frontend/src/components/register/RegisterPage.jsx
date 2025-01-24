@@ -70,6 +70,7 @@ const RegisterPage = () => {
             />
           </div>
           <button type="submit" className="register-button">Register</button>
+          <p>Already a member? <a href="/login">Click here to login</a></p>
         </form>
       </div>
     </div>

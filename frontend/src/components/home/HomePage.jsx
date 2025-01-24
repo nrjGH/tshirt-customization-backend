@@ -1,25 +1,32 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './home.css';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate('/register');
+  };
+
   return (
     <div className="homepage-container">
       {/* Top Designs Section */}
       <section className="bg-secondary rounded-lg p-6">
-        <h2 className="section-title"></h2>
+        <h2 className="section-title">Top Designs</h2>
         <div className="designs-container">
           {/* Placeholder for top 3 trending designs */}
           <div className="design-card">
             <img src="https://mockey.ai/wp-content/uploads/sites/15/2024/02/create-a-celestial-bard-avatar-clad-in-gold-stardust-robes-and-strumming-a-lute-beneath-a-sky-filled-with-cosmic-music-prompt-for-dall-e.webp" alt="Design 1" className="design-image" />
-            <h3 className="design-title"></h3>
+            <h3 className="design-title">Design 1</h3>
           </div>
           <div className="design-card">
             <img src="https://mockey.ai/wp-content/uploads/sites/15/2024/02/design-an-avatar-of-a-cybernetic-samurai-set-against-a-futuristic-city-skyline-with-glowing-neon-katanas-and-circuitry-armor-dall-e-prompts.webp" alt="Design 2" className="design-image" />
-            <h3 className="design-title"></h3>
+            <h3 className="design-title">Design 2</h3>
           </div>
           <div className="design-card">
             <img src="https://mockey.ai/wp-content/uploads/sites/15/2024/02/under-a-sky-illuminated-by-earths-light-aliens-play-soccer-with-moon-rocks-on-a-lunar-colony-dall-e-prompts.webp" alt="Design 3" className="design-image" />
-            <h3 className="design-title"></h3>
+            <h3 className="design-title">Design 3</h3>
           </div>
         </div>
       </section>
@@ -43,8 +50,7 @@ const HomePage = () => {
           Create your account today and gain access to exclusive designs, discounts, and a supportive community of creators.
         </p>
         <form className="signup-form">
-          {/* <input type="email" placeholder="Enter your email" required className="signup-input" /> */}
-          <button type="submit" className="signup-button">Join Shirt Customizer</button>
+          <button type="button" onClick={handleRegisterClick} className="signup-button">Join Shirt Customizer</button>
         </form>
       </section>
     </div>

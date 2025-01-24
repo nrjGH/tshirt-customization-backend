@@ -11,8 +11,18 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/login', { email, password });
-      localStorage.setItem('token', response.data.token);
+      const response = await axios.post('https://tshirt-customization-backend.onrender.com/api/v1/users/login', { email, password });
+      //does not work
+      // localStorage.setItem('token', response.data.token);
+      // alert('Login Successful! Redirecting...');
+      // navigate('/designs'); // Navigate to the designs page\
+      
+      //works   
+      const { accessToken, refreshToken, user } = response.data.data;
+      console.log(response.data.data);
+      localStorage.setItem('token', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      localStorage.setItem('user', JSON.stringify(user));
       alert('Login Successful! Redirecting...');
       navigate('/designs'); // Navigate to the designs page
     } catch (error) {
@@ -49,6 +59,7 @@ const LoginPage = () => {
             />
           </div>
           <button type="submit" className="login-button">Login</button>
+          Don't have an account? <a href="/register"> Register </a>here.
         </form>
       </div>
     </div>

@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './designs.css';
 
-const DesignsPage = () => {
-  const [designs, setDesigns] = useState([]); // Designs data from the backend
-  const [page, setPage] = useState(1); // Pagination state
-  const [hasMore, setHasMore] = useState(true); // Check for more designs
+const DesignPage = () => {
+  const [designs, setDesigns] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     fetchDesigns();
@@ -18,7 +19,7 @@ const DesignsPage = () => {
       });
 
       const { docs, hasMore } = response.data.data;
-      setDesigns((prevDesigns) => [...prevDesigns, ...docs]);
+      setDesigns(docs); // Set designs directly instead of appending
       setHasMore(hasMore);
     } catch (error) {
       console.error('Failed to fetch designs:', error);
@@ -27,22 +28,18 @@ const DesignsPage = () => {
 
   return (
     <div className="designs-page">
-      <h1 className="designs-title">Public Designs</h1>
-      <div className="designs-grid">
-        {designs.map((design) => (
-          <div key={design._id} className="design-card">
-            <img
-              src={design.designLink || '/placeholder.svg'}
-              alt={design.name}
-              className="design-image"
-            />
-            <h2 className="design-name">{design.name}</h2>
-            <p className="design-color">Color: {design.color}</p>
-          </div>
-        ))}
-      </div>
+      {designs.map((design) => (
+        // code updated here: added unique key prop and updated design details
+        <div key={design._id} className="design-card">
+          <h2>{design.name}</h2>
+          <img src={design.designLink} alt={design.name} />
+          <p>Color: {design.color}</p>
+          {/* <p>Created By: {design.createdBy}</p> */} {/* create functionality to show username of account that created this design */}
+          <p>Likes: {design.likedBy.length}</p>
+        </div>
+      ))}
       {hasMore && (
-        <button className="load-more-button" onClick={() => setPage((prev) => prev + 1)}>
+        <button onClick={() => setPage((prevPage) => prevPage + 1)}>
           Load More
         </button>
       )}
@@ -50,4 +47,4 @@ const DesignsPage = () => {
   );
 };
 
-export default DesignsPage;
+export default DesignPage;

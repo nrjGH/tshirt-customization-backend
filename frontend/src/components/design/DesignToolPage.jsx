@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './design.css';
 
 const DesignToolPage = () => {
@@ -12,9 +13,31 @@ const DesignToolPage = () => {
     setPreviewImage(design); // Set the fetched image as the preview
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ color, design, name, isPublic });
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('You need to be logged in to save a design');
+        return;
+      }
+
+      const response = await axios.post('https://tshirt-customization-backend.onrender.com/api/v1/designs/', {
+        designLink: design,
+        name,
+        isPublic,
+        color,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token.trim()}`, // Include JWT token in the request headers
+        },
+      });
+      console.log('Design saved:', response.data);
+      alert('Design saved successfully!');
+    } catch (error) {
+      console.error('Failed to save design:', error);
+      alert('Failed to save design');
+    }
   };
 
   return (

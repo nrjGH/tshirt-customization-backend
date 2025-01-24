@@ -1,7 +1,17 @@
+import { useEffect } from 'react';
 import './cart.css';
+import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
   const cart = [];
+  const navigate = useNavigate();
+  useEffect(() => { 
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('You need to be logged in to access this page');
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const handleRemove = (id) => {
     console.log(`Removing item with ID: ${id}`);

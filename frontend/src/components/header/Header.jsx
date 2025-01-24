@@ -5,8 +5,8 @@ const Header = () => {
   const location = useLocation();
 
   // Mock user and cart data (replace with actual logic)
-  const user = { username: 'JohnDoe', accessToken: 'mockAccessToken' };
-  const cart = [{ id: 1 }, { id: 2 }];
+  const user = {};
+  const cart = [];
 
   return (
     <header className="header">
