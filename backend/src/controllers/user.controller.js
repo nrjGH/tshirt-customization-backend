@@ -86,7 +86,7 @@ const loginUser = asyncHandler( async (req, res) => {
         httpOnly : true,                                            // cookies be available only through http
         secure : true                                               // cookies be shared only via https    
     }
-
+    
     return res
     .status(200).
     cookie("accessToken", accessToken, options)
@@ -145,9 +145,31 @@ const changeCurrentPassword = asyncHandler(async(req,res) => {
     .status(200)
     .json(new ApiResponse(200,{},"password changed succesfully"))
 })
+
+const verifyUser = asyncHandler(async (req, res) => {
+    const accessToken = req.cookies?.accessToken;
+
+    if (!accessToken) {
+        console.log("No access token found in cookies");
+        throw new ApiError(401, "Unauthorized request");
+    }
+
+    try {
+        // Get the user data from the auth middleware
+        const user = req.user; // This is set by verifyJWT middleware
+        
+        return res
+        .status(200)
+        .json(new ApiResponse(200, { user }, "User is authenticated")); // Send user data in response
+    } catch (error) {
+        throw new ApiError(401, "Invalid access token");
+    }
+});
+
 export {
     registerUser,
     loginUser,
     logoutUser,
-    changeCurrentPassword
+    changeCurrentPassword,
+    verifyUser
 }

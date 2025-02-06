@@ -1,37 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './design.css';
+import { useNavigate } from 'react-router-dom';
 
 const DesignToolPage = () => {
   const [color, setColor] = useState('white');
   const [design, setDesign] = useState('');
   const [name, setName] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [previewImage, setPreviewImage] = useState(''); // State for fetched image
+  const [previewImage, setPreviewImage] = useState('');
+  const [profile, setProfile] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/v1/users/verify', {
+          withCredentials: true
+        });
+        
+        if (response.data.statusCode === 200) {
+          setProfile(response.data.data.user);
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        navigate('/login');
+      }
+    };
+  
+    fetchUserData();
+  }, [navigate]);
 
   const handleFetchImage = () => {
-    setPreviewImage(design); // Set the fetched image as the preview
+    setPreviewImage(design);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        alert('You need to be logged in to save a design');
-        return;
-      }
-
-      const response = await axios.post('https://tshirt-customization-backend.onrender.com/api/v1/designs/', {
-        designLink: design,
-        name,
-        isPublic,
-        color,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token.trim()}`, // Include JWT token in the request headers
+      const response = await axios.post(
+        'https://tshirt-customization-backend.onrender.com/api/v1/designs/',
+        {
+          designLink: design,
+          name,
+          isPublic,
+          color,
         },
-      });
+        { withCredentials: true }
+      );
+      
       console.log('Design saved:', response.data);
       alert('Design saved successfully!');
     } catch (error) {
@@ -39,6 +56,10 @@ const DesignToolPage = () => {
       alert('Failed to save design');
     }
   };
+
+  if (!profile) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="design-container">

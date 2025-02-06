@@ -12,7 +12,7 @@ import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post("/", createDesign);
+router.post("/", verifyJWT, createDesign);
 router.get("/public", listPublicDesigns);
 router.get("/search", searchDesignsByName); // New route for search
 router.get("/:id", verifyJWT, getDesignById);

@@ -4,34 +4,50 @@ import axios from 'axios';
 import './profile.css';
 
 const ProfilePage = () => {
-  const [profile, setProfile] = useState({
-    username: '',
-    fullname: '',
-    email: ''
-  });
+  const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('refreshToken');
-    
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      const verifyResponse = await axios.get(
+        'https://tshirt-customization-backend.onrender.com/api/v1/users/verify',
+        { withCredentials: true }
+      );
+
+      if (verifyResponse.data.statusCode === 200) {
+        const response = await axios.get(
+          'https://tshirt-customization-backend.onrender.com/api/v1/users/logout',
+          {
+            withCredentials: true,
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+
+        if (response.status === 200) {
+          // Force navigation to login page
+          navigate('/login');
+        }
+      }
+    } catch (error) {
+      console.error('Logout failed:', error);
+      alert('Logout failed. Please try again.');
+    }
   };
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const storedUser = localStorage.getItem('user');
+        const response = await axios.get(
+          'https://tshirt-customization-backend.onrender.com/api/v1/users/verify',
+          { withCredentials: true }
+        );
         
-        if (!token || !storedUser) {
-          navigate('/login');
-          return;
+        if (response.data.statusCode === 200) {
+          setProfile(response.data.data.user);
         }
-  
-        const parsedUser = JSON.parse(storedUser);
-        setProfile(parsedUser);
       } catch (error) {
         console.error('Profile fetch failed:', error);
         navigate('/login');
@@ -40,6 +56,10 @@ const ProfilePage = () => {
   
     fetchUserData();
   }, [navigate]);
+
+  if (!profile) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="profile-page">

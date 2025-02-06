@@ -11,22 +11,22 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://tshirt-customization-backend.onrender.com/api/v1/users/login', { email, password });
-      //does not work
-      // localStorage.setItem('token', response.data.token);
-      // alert('Login Successful! Redirecting...');
-      // navigate('/designs'); // Navigate to the designs page\
-      
-      //works   
-      const { accessToken, refreshToken, user } = response.data.data;
-      console.log(response.data.data);
-      localStorage.setItem('token', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('user', JSON.stringify(user));
-      alert('Login Successful! Redirecting...');
-      navigate('/designs'); // Navigate to the designs page
+      const response = await axios.post(
+        'https://tshirt-customization-backend.onrender.com/api/v1/users/login', 
+        { email, password },
+        { 
+          withCredentials: true // Enable sending/receiving cookies
+        }
+      );
+
+      if (response.data.statusCode === 200) {
+        alert('Login Successful! Redirecting...');
+        navigate('/profile');
+      }
     } catch (error) {
-      alert('Login Failed. Please check your credentials.');
+      // Improved error handling
+      const errorMessage = error.response?.data?.message || 'Login Failed. Please check your credentials.';
+      alert(errorMessage);
     }
   };
 
