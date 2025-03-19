@@ -147,14 +147,15 @@ const changeCurrentPassword = asyncHandler(async(req,res) => {
 })
 
 const verifyUser = asyncHandler(async (req, res) => {
-    const accessToken = req.cookies?.accessToken;
-
-    if (!accessToken) {
-        console.log("No access token found in cookies");
-        throw new ApiError(401, "Unauthorized request");
-    }
-
     try {
+        const accessToken = req.cookies?.accessToken;
+        console.log(accessToken);
+        if (!accessToken) {
+            console.log("No access token found in cookies");
+            throw new ApiError(401, "Unauthorized request");
+        }
+
+    
         // Get the user data from the auth middleware
         const user = req.user; // This is set by verifyJWT middleware
         
