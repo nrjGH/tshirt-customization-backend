@@ -11,7 +11,7 @@ const app = express()
 
 app.use(cors({
     // origin: "http://localhost:3000",
-    origin: "https://tshirt-customization-backend-1.onrender.com",
+    origin: ["https://tshirt-customization-backend-1.onrender.com","http://localhost:3000"],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
