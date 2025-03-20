@@ -13,7 +13,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/register', { username, email, fullname, password });
+      await axios.post('https://tshirt-customization-backend.onrender.com/api/v1/users/register', { username, email, fullname, password });
       alert('Registration Successful! You can now log in.');
       navigate('/login');
     } catch (error) {
