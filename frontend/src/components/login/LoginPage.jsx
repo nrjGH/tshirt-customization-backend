@@ -12,7 +12,8 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'https://tshirt-customization-backend.onrender.com/api/v1/users/login', 
+        // 'http://localhost:8000/api/v1/users/login', 
+        'https://tshirt-customization-backend.onrender.com/api/v1/users/login',
         { email, password },
         { 
           withCredentials: true // Enable sending/receiving cookies

@@ -15,10 +15,13 @@ const DesignToolPage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('https://tshirt-customization-backend.onrender.com/api/v1/users/verify', {
+        const response = await axios.get(
+          // 'http://localhost:8000/api/v1/users/verify',
+          'https://tshirt-customization-backend.onrender.com/api/v1/users/verify',
+          {
           withCredentials: true
         });
-        
+        console.log(response)
         if (response.data.statusCode === 200) {
           setProfile(response.data.data.user);
         }

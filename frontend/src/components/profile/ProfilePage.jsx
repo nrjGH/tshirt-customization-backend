@@ -10,12 +10,14 @@ const ProfilePage = () => {
   const handleLogout = async () => {
     try {
       const verifyResponse = await axios.get(
+        // 'http://localhost:8000/api/v1/users/verify',
         'https://tshirt-customization-backend.onrender.com/api/v1/users/verify',
         { withCredentials: true }
       );
 
       if (verifyResponse.data.statusCode === 200) {
         const response = await axios.get(
+          // 'http://localhost:8000/api/v1/users/logout',
           'https://tshirt-customization-backend.onrender.com/api/v1/users/logout',
           {
             withCredentials: true,
@@ -41,7 +43,8 @@ const ProfilePage = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          'https://tshirt-customization-backend.onrender.com/api/v1/users/verify',
+          'http://localhost:8000/api/v1/users/verify',
+          // 'https://tshirt-customization-backend.onrender.com/api/v1/users/verify',
           { withCredentials: true }
         );
         

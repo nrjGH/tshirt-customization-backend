@@ -84,7 +84,8 @@ const loginUser = asyncHandler( async (req, res) => {
 
     const options = {
         httpOnly : true,                                            // cookies be available only through http
-        secure : true                                               // cookies be shared only via https    
+        secure : true,
+        sameSite : "None"                                               // cookies be shared only via https    
     }
     
     return res
@@ -118,7 +119,8 @@ const logoutUser = asyncHandler(async(req, res) => {
 
     const options = {
         httpOnly : true,
-        secure : true
+        secure : true,
+        sameSite : "None"
     }
 
     return res
