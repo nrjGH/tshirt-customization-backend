@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';  // Add this import
 import './footer.css';
 
 const Footer = () => {
@@ -6,10 +7,10 @@ const Footer = () => {
         <footer className="footer">
             <div className="footer-container">
                 <div className="footer-header">
-                        <img src="https://res.cloudinary.com/dl3atd6kf/image/upload/v1737564544/logo_sc-removebg-preview_ipeifi.png"  className="footer-logo-image" />
-                    <a href="/" className="footer-logo">
+                    <img src="https://res.cloudinary.com/dl3atd6kf/image/upload/v1737564544/logo_sc-removebg-preview_ipeifi.png"  className="footer-logo-image" />
+                    <Link to="/" className="footer-logo">
                         <span className="footer-logo-text">Shirt Customizer</span>
-                    </a>
+                    </Link>
                     <p className="footer-description">
                         Your go-to platform for unique, personalized shirt designs since 2025.
                     </p>
@@ -24,10 +25,10 @@ const Footer = () => {
                     <div className="footer-section">
                         <h3 className="footer-heading">Quick Links</h3>
                         <ul className="footer-list">
-                            <li><a href="/" className="footer-link">Home</a></li>
-                            <li><a href="/designs" className="footer-link">Designs</a></li>
-                            <li><a href="/about" className="footer-link">About</a></li>
-                            <li><a href="/design" className="footer-link">Create Design</a></li>
+                            <li><Link to="/" className="footer-link">Home</Link></li>
+                            <li><Link to="/designs" className="footer-link">Designs</Link></li>
+                            <li><Link to="/about" className="footer-link">About</Link></li>
+                            <li><Link to="/design" className="footer-link">Create Design</Link></li>
                         </ul>
                     </div>
                     <div className="footer-section">
