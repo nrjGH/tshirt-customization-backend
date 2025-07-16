@@ -17,15 +17,16 @@ const HomePage = () => {
         <div className="designs-container">
           {/* Placeholder for top 3 trending designs */}
           <div className="design-card">
-            <img src="https://mockey.ai/wp-content/uploads/sites/15/2024/02/create-a-celestial-bard-avatar-clad-in-gold-stardust-robes-and-strumming-a-lute-beneath-a-sky-filled-with-cosmic-music-prompt-for-dall-e.webp" alt="Design 1" className="design-image" />
+            <img 
+            src="https://res.cloudinary.com/dl3atd6kf/image/upload/v1752689202/zg4r0ywegw3hzdquorty.png" alt="Design 1" className="design-image" />
             <h3 className="design-title">Design 1</h3>
           </div>
           <div className="design-card">
-            <img src="https://mockey.ai/wp-content/uploads/sites/15/2024/02/design-an-avatar-of-a-cybernetic-samurai-set-against-a-futuristic-city-skyline-with-glowing-neon-katanas-and-circuitry-armor-dall-e-prompts.webp" alt="Design 2" className="design-image" />
+            <img src="https://res.cloudinary.com/dl3atd6kf/image/upload/v1737748991/cf6216fac15f7562cc2693d6549e2597_ryaij2.jpg" alt="Design 2" className="design-image" />
             <h3 className="design-title">Design 2</h3>
           </div>
           <div className="design-card">
-            <img src="https://mockey.ai/wp-content/uploads/sites/15/2024/02/under-a-sky-illuminated-by-earths-light-aliens-play-soccer-with-moon-rocks-on-a-lunar-colony-dall-e-prompts.webp" alt="Design 3" className="design-image" />
+            <img src="https://res.cloudinary.com/dl3atd6kf/image/upload/v1752689550/iwqrg4jwguvosw5pd3cs.png" alt="Design 3" className="design-image" />
             <h3 className="design-title">Design 3</h3>
           </div>
         </div>
